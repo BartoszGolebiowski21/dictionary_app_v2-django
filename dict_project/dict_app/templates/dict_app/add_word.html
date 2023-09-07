@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Add a new word
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "dict_app/add_word.css" %}">
+{% endblock %}
+
+{% block content %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="word-input {% if field.errors %}errors{% endif %}">
+                {{ field.label_tag }}
+                <input type="text" name="{{ field.name }}" placeholder="Enter the word...">
+                {{ field.errors }}
+            </div>
+        {% endfor %}
+        <button class="base-button large-button green-button" type="submit">Save</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Search mode
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "dict_app/add_word.css" %}">
+    <link rel="stylesheet" href="{% static "dict_app/entire_dictionary.css" %}">
+{% endblock %}
+
+{% block content %}
+    <form action="{% url "search" %}" method="GET">
+        <div class="word-input">
+            <label>Search in the dictionary</label>
+            <input type="text" name="search_query" placeholder="Search an English or Polish word..." 
+            value="{{search_query}}">
+        </div>
+        <button class="base-button large-button blue-button" type="submit">Search</button>
+    </form>
+
+    <div>
+        {% if search_query %}
+            {% if words %}
+                <ul>
+                    {% for word in words %}
+                        <a href="{% url "word-detail" word.id %}">
+                            <li>{{ word.english_translation }} - {{ word.polish_translation }}</li>
+                        </a>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>There are no matching words. Please try again.</p>
+            {% endif %}
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Test mode
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "dict_app/word-details.css" %}">
+{% endblock %}
+
+{% block content %}
+    <p><img src="https://icons.iconarchive.com/icons/hopstarter/flag-borderless/128/United-Kingdom-icon.png" width="32" height="32">
+        {{ object.english_translation }}</p>
+    {% if object.english_pronunciation %}
+    <p><img src="https://icons.iconarchive.com/icons/pictogrammers/material/128/account-voice-icon.png" width="32" height="32">
+        [{{ object.english_pronunciation }}]</p>
+    {% endif %}
+    <p><img src="https://icons.iconarchive.com/icons/hopstarter/flag-borderless/128/Poland-icon.png" width="32" height="32">
+        {{ object.polish_translation }}</p>
+    <p>Remaining repetitions: {{ object.remaining_repetitions }}</p>
+
+    <a href="{% url "edit-word" word.id %}">
+        <button class="base-button small-button green-button">Edit</button>
+    </a>
+    <a href="{% url "delete-word" word.id %}">
+        <button class="base-button small-button red-button">Delete</button>
+    </a>
+    <div style="clear:both;"></div>
+{% endblock %}

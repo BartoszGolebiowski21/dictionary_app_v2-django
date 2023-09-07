@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Dictionary App
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "dict_app/index.css" %}">
+{% endblock %}
+
+{% block content %}
+    <a href="{% url "search" %}">
+        <div class="menu-item">
+            Search in the dictionary
+        </div>
+    </a>
+
+    <a href="{% url "add-word" %}">
+        <div class="menu-item">
+            Add a new word
+        </div>
+    </a>
+
+    <a href="{% url "entire-dictionary" %}">
+        <div class="menu-item">
+            Show the entire dictionary
+        </div>
+    </a>
+
+    <a href="{% url "test" %}">
+        <div class="menu-item">
+            Test mode
+        </div>
+    </a>
+
+    <a href="">
+        <div class="menu-item">
+            Log in
+        </div>
+    </a>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Test mode
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "dict_app/word-details.css" %}">
+{% endblock %}
+
+{% block content %}
+    <p>Are you sure you want to delete </br>
+        "{{ object.english_translation }} - {{ object.polish_translation }}"?</p>
+    <form method="POST">
+        {% csrf_token %}
+        <button class="base-button small-button red-button">Yes, confirm</button>
+    </form>
+    <a href="{% url "word-detail" word.id %}">
+        <button class="base-button small-button blue-button">No, go back</button>
+    </a>
+    <div style="clear:both;"></div>
+{% endblock %}

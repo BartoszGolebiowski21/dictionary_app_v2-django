@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+The entire dictionary
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "dict_app/entire_dictionary.css" %}">
+{% endblock %}
+
+{% block content %}
+    {% if words %}
+        <ul>
+            {% for word in words %}
+                <a href="{% url "word-detail" word.id %}">
+                    <li>{{ word.english_translation }} - {{ word.polish_translation }}</li>
+                </a>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>There are no words in the dictionary.</p>
+    {% endif %}
+{% endblock %}

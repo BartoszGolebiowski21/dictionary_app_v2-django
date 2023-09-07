@@ -1,0 +1,31 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static "base.css" %}">
+    {% block css_files %}
+    {% endblock %}
+</head>
+<body>
+    <div class="app-container">
+        <header id="header">
+            <h3>DICTIONARY APP</h3>
+        </header>
+
+        <a href="{% url "starting-page" %}">
+            <nav id="menu">
+                MENU
+            </nav>
+        </a>
+
+        <div id="content-container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</body>
+</html>
