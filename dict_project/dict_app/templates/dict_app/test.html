@@ -14,26 +14,20 @@ Test mode
         <div class="word-display">
             <span class="polish-word">{{ drawn_word.polish_translation }}</span>
         </div>
-            <form action="" method="GET">
-                {% comment %} {% csrf_token %} {% endcomment %}
-                <div class="translation-input">
-                    {% comment %} <label>English translation:</label> {% endcomment %}
-                    {{ form.as_p }}
-                    {% comment %} <input type="text" id="translation" placeholder="Enter the translation"> {% endcomment %}
-                </div>
-                <button class="base-button large-button blue-button" type="submit">Check</button>
-            </form>
 
-            <button class="base-button small-button green-button">Learned</button>
-            <button class="base-button small-button red-button">Super-hard</button>
-            <div style="clear:both;"></div>
-        <div class="result-message">
-            {% if entered_word == drawn_word.english_translation %}
-                <p>Correct answer!</p>
-            {% else %}
-                <p>Failed</p>
-            {% endif %}
-        </div>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="translation-input">
+                {% comment %} <label>English translation:</label> {% endcomment %}
+                {{ form.as_p }}
+                {% comment %} <input type="text" id="translation" placeholder="Enter the translation"> {% endcomment %}
+            </div>
+            <button class="base-button large-button blue-button" type="submit">Check</button>
+        </form>
+
+        <button class="base-button small-button green-button">Learned</button>
+        <button class="base-button small-button red-button">Super-hard</button>
+        <div style="clear:both;"></div>
     {% else %}
         <p>There are no words to make a test.</p>
     {% endif %}

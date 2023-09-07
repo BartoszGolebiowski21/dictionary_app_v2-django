@@ -4,7 +4,6 @@ from . import views
 
 urlpatterns = [
     path("", views.index, name="starting-page"),
-    path("test", views.test, name="test"),
     path("search", views.search, name="search"),
     path("entire-dictionary", views.EntireDictionaryView.as_view(), 
          name="entire-dictionary"),
@@ -15,4 +14,6 @@ urlpatterns = [
          name="edit-word"),
     path("word-detail/<int:pk>/delete-word", views.DeleteWordView.as_view(), 
          name="delete-word"),
+    path("test", views.TestView.as_view(), name="test"),
+    path("check", views.check, name="check"),
 ]
