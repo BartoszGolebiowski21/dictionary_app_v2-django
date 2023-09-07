@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Test mode
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "dict_app/test.css" %}">
+{% endblock %}
+
+{% block content %}
+    <div class="word-display">
+        {% comment %} <span class="polish-word">{{ drawn_word.polish_translation }}</span> {% endcomment %}
+        <span class="polish-word">{{ drawn_word_polish }}</span></br>
+        <span class="polish-word">{{ drawn_word_english }}</span>
+    </div>
+
+    <div class="result-message">
+        {% if entered_word == drawn_word_english %}
+            <p>Correct answer!</p>
+        {% else %}
+            <p>Failed! Try again later</p>
+        {% endif %}
+    </div>
+
+    <button class="base-button large-button blue-button">Next</button>
+    <button class="base-button small-button green-button">Learned</button>
+    <button class="base-button small-button red-button">Super-hard</button>
+    <div style="clear:both;"></div>
+
+
+{% endblock %}
