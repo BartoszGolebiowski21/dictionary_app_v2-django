@@ -1,13 +1,15 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.views import View
 from django.urls import reverse, reverse_lazy
 from django.db.models import Q
 
 from .forms import WordForm, TestForm
-from .models import Word
+from .models import Word, Page
+
+from django.db.models import Avg
 
 
 def index(request):
@@ -67,6 +69,7 @@ class TestView(View):
 
         request.session['drawn_word_english'] = drawn_word.english_translation
         request.session['drawn_word_polish'] = drawn_word.polish_translation
+        request.session['drawn_word_id'] = drawn_word.id
 
         context = {'form': form, 'drawn_word': drawn_word}
         return render(request, "dict_app/test.html", context)
@@ -85,6 +88,12 @@ def check(request):
     drawn_word_english = request.session.get('drawn_word_english')
     drawn_word_polish = request.session.get('drawn_word_polish')
     entered_word = request.session.get('entered_word')
+    drawn_word_id = request.session.get('drawn_word_id')
+
+    if entered_word == drawn_word_english:
+        word = Word.objects.get(id=drawn_word_id)
+        word.remaining_repetitions -= 1
+        word.save()
 
     context = {
         "drawn_word_english": drawn_word_english, 
@@ -92,3 +101,13 @@ def check(request):
         "entered_word": entered_word,
         }
     return render(request, "dict_app/check.html", context)
+
+
+def visits_count(request):
+    # visits_count = Page.objects.values_list("visits_count", flat=True)
+    # average = sum(visits_count) / len(visits_count)
+
+    average = Page.objects.aggregate(avg=Avg('visits_count'))['avg']
+
+    print(visits_count)
+    return HttpResponse(average)

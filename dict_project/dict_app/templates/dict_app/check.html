@@ -10,11 +10,16 @@ Test mode
 {% endblock %}
 
 {% block content %}
-    <div class="word-display">
-        {% comment %} <span class="polish-word">{{ drawn_word.polish_translation }}</span> {% endcomment %}
+    {% comment %} <div class="word-display">
         <span class="polish-word">{{ drawn_word_polish }}</span></br>
         <span class="polish-word">{{ drawn_word_english }}</span>
-    </div>
+    </div> {% endcomment %}
+
+    <p><img src="https://icons.iconarchive.com/icons/hopstarter/flag-borderless/128/Poland-icon.png" width="32" height="32">
+        {{ drawn_word_polish }}</p>
+
+    <p><img src="https://icons.iconarchive.com/icons/hopstarter/flag-borderless/128/United-Kingdom-icon.png" width="32" height="32">
+        {{ drawn_word_english }}</p>
 
     <div class="result-message">
         {% if entered_word == drawn_word_english %}
@@ -24,10 +29,11 @@ Test mode
         {% endif %}
     </div>
 
-    <button class="base-button large-button blue-button">Next</button>
+    <a href="{% url "test" %}">
+        <button class="base-button large-button blue-button">Next</button>
+    </a>
+    
     <button class="base-button small-button green-button">Learned</button>
     <button class="base-button small-button red-button">Super-hard</button>
     <div style="clear:both;"></div>
-
-
 {% endblock %}

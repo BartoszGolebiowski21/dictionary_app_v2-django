@@ -12,10 +12,12 @@ Test mode
 {% block content %}
     <p><img src="https://icons.iconarchive.com/icons/hopstarter/flag-borderless/128/United-Kingdom-icon.png" width="32" height="32">
         {{ object.english_translation }}</p>
+
     {% if object.english_pronunciation %}
     <p><img src="https://icons.iconarchive.com/icons/pictogrammers/material/128/account-voice-icon.png" width="32" height="32">
         [{{ object.english_pronunciation }}]</p>
     {% endif %}
+    
     <p><img src="https://icons.iconarchive.com/icons/hopstarter/flag-borderless/128/Poland-icon.png" width="32" height="32">
         {{ object.polish_translation }}</p>
     <p>Remaining repetitions: {{ object.remaining_repetitions }}</p>

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Word
+from .models import Word, Page
 
 # Register your models here.
 
@@ -9,3 +9,4 @@ class WordAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Word, WordAdmin)
+admin.site.register(Page)
