@@ -63,11 +63,15 @@ def search(request):
 class TestView(View):
     def get(self, request):
         form = TestForm()
-        drawn_word = Word.objects.order_by('?')[1]
+        try:
+            drawn_word = Word.objects.filter(remaining_repetitions__gt=0).order_by('?')[1]
 
-        request.session['drawn_word_english'] = drawn_word.english_translation
-        request.session['drawn_word_polish'] = drawn_word.polish_translation
-        request.session['drawn_word_id'] = drawn_word.id
+            request.session['drawn_word_english'] = drawn_word.english_translation
+            request.session['drawn_word_polish'] = drawn_word.polish_translation
+            request.session['drawn_word_id'] = drawn_word.id
+
+        except IndexError:
+            drawn_word = None
 
         context = {'form': form, 'drawn_word': drawn_word}
         return render(request, "dict_app/test.html", context)
@@ -88,13 +92,20 @@ def check(request):
     entered_word = request.session.get('entered_word')
     drawn_word_id = request.session.get('drawn_word_id')
 
+    # words = Word.objects.all()
+    # print(words)
+    # for word in words:
+    #     word.remaining_repetitions = 0
+    #     word.save()
+
     if entered_word == drawn_word_english:
         word = Word.objects.get(id=drawn_word_id)
         word.remaining_repetitions -= 1
         word.save()
+        print(word.remaining_repetitions)
 
     context = {
-        "drawn_word_english": drawn_word_english, 
+        "drawn_word_english": drawn_word_english,
         "drawn_word_polish": drawn_word_polish,
         "entered_word": entered_word,
         }
