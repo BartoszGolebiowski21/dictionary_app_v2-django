@@ -16,5 +16,4 @@ urlpatterns = [
          name="delete-word"),
     path("test", views.TestView.as_view(), name="test"),
     path("check", views.check, name="check"),
-    path("visits_count", views.visits_count, name="visits_count"),
 ]

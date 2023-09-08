@@ -1,15 +1,13 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from django.views import View
 from django.urls import reverse, reverse_lazy
 from django.db.models import Q
 
 from .forms import WordForm, TestForm
-from .models import Word, Page
-
-from django.db.models import Avg
+from .models import Word
 
 
 def index(request):
@@ -102,12 +100,3 @@ def check(request):
         }
     return render(request, "dict_app/check.html", context)
 
-
-def visits_count(request):
-    # visits_count = Page.objects.values_list("visits_count", flat=True)
-    # average = sum(visits_count) / len(visits_count)
-
-    average = Page.objects.aggregate(avg=Avg('visits_count'))['avg']
-
-    print(visits_count)
-    return HttpResponse(average)

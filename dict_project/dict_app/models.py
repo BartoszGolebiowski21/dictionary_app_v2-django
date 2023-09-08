@@ -8,11 +8,3 @@ class Word(models.Model):
 
     def __str__(self):
         return f"{self.id}: {self.english_translation} - {self.polish_translation}"
-
-
-class Page(models.Model):
-    page_name = models.CharField(max_length=80)
-    visits_count = models.IntegerField(default=0)
-
-    def __str__(self):
-        return f"{self.page_name} - {self.visits_count}"
