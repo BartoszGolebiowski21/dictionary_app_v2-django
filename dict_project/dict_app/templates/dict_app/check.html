@@ -11,11 +11,6 @@ Test mode
 
 {% block content %}
     {% if entered_word %}
-        {% comment %} <div class="word-display">
-            <span class="polish-word">{{ drawn_word_polish }}</span></br>
-            <span class="polish-word">{{ drawn_word_english }}</span>
-        </div> {% endcomment %}
-
         <p><img src="https://icons.iconarchive.com/icons/hopstarter/flag-borderless/128/Poland-icon.png" width="32" height="32">
             {{ drawn_word_polish }}</p>
 
@@ -36,8 +31,10 @@ Test mode
     <a href="{% url "test" %}">
         <button class="base-button large-button blue-button">Next</button>
     </a>
-    
-    <button class="base-button small-button green-button">Learned</button>
-    <button class="base-button small-button red-button">Super-hard</button>
-    <div style="clear:both;"></div>
+
+    {% if entered_word %}
+        <button class="base-button small-button green-button">Learned</button>
+        <button class="base-button small-button red-button">Super-hard</button>
+        <div style="clear:both;"></div>
+    {% endif %}
 {% endblock %}

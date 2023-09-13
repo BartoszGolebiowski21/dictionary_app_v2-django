@@ -102,15 +102,9 @@ def check(request):
     entered_word = request.session.get('entered_word')
     drawn_word_id = request.session.get('drawn_word_id')
 
-    # words = Word.objects.all()
-    # print(words)
-    # for word in words:
-    #     word.remaining_repetitions = 0
-    #     word.save()
-
-    if entered_word == drawn_word_english:
-        if 'entered_word' in request.session:
-            request.session.clear()
+    if 'entered_word' in request.session:
+        request.session.clear()
+        if entered_word == drawn_word_english:
             word = Word.objects.get(id=drawn_word_id)
             word.remaining_repetitions -= 1
             word.save()
