@@ -9,6 +9,8 @@ from django.db.models import Q
 from .forms import WordForm, TestForm
 from .models import Word
 
+from random import randint
+
 
 def index(request):
     return render(request, "dict_app/index.html")
@@ -63,14 +65,22 @@ def search(request):
 class TestView(View):
     def get(self, request):
         form = TestForm()
-        try:
-            drawn_word = Word.objects.filter(remaining_repetitions__gt=0).order_by('?')[1]
+
+        words = Word.objects.filter(remaining_repetitions__gt=0)
+        count = words.count()
+
+        if count > 0:
+            random_index = randint(0, count - 1)
+            drawn_word = words[random_index]
+
+            # SLOWER METHOD:
+            # drawn_word = Word.objects.filter(remaining_repetitions__gt=0).order_by('?')[1]
 
             request.session['drawn_word_english'] = drawn_word.english_translation
             request.session['drawn_word_polish'] = drawn_word.polish_translation
             request.session['drawn_word_id'] = drawn_word.id
 
-        except IndexError:
+        else:
             drawn_word = None
 
         context = {'form': form, 'drawn_word': drawn_word}
@@ -99,10 +109,12 @@ def check(request):
     #     word.save()
 
     if entered_word == drawn_word_english:
-        word = Word.objects.get(id=drawn_word_id)
-        word.remaining_repetitions -= 1
-        word.save()
-        print(word.remaining_repetitions)
+        if 'entered_word' in request.session:
+            request.session.clear()
+            word = Word.objects.get(id=drawn_word_id)
+            word.remaining_repetitions -= 1
+            word.save()
+            print(word.remaining_repetitions)
 
     context = {
         "drawn_word_english": drawn_word_english,

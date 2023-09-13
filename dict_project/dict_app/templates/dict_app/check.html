@@ -10,24 +10,28 @@ Test mode
 {% endblock %}
 
 {% block content %}
-    {% comment %} <div class="word-display">
-        <span class="polish-word">{{ drawn_word_polish }}</span></br>
-        <span class="polish-word">{{ drawn_word_english }}</span>
-    </div> {% endcomment %}
+    {% if entered_word %}
+        {% comment %} <div class="word-display">
+            <span class="polish-word">{{ drawn_word_polish }}</span></br>
+            <span class="polish-word">{{ drawn_word_english }}</span>
+        </div> {% endcomment %}
 
-    <p><img src="https://icons.iconarchive.com/icons/hopstarter/flag-borderless/128/Poland-icon.png" width="32" height="32">
-        {{ drawn_word_polish }}</p>
+        <p><img src="https://icons.iconarchive.com/icons/hopstarter/flag-borderless/128/Poland-icon.png" width="32" height="32">
+            {{ drawn_word_polish }}</p>
 
-    <p><img src="https://icons.iconarchive.com/icons/hopstarter/flag-borderless/128/United-Kingdom-icon.png" width="32" height="32">
-        {{ drawn_word_english }}</p>
+        <p><img src="https://icons.iconarchive.com/icons/hopstarter/flag-borderless/128/United-Kingdom-icon.png" width="32" height="32">
+            {{ drawn_word_english }}</p>
 
-    <div class="result-message">
-        {% if entered_word == drawn_word_english %}
-            <p>Correct answer!</p>
-        {% else %}
-            <p>Failed! Try again later</p>
-        {% endif %}
-    </div>
+        <div class="result-message">
+            {% if entered_word == drawn_word_english %}
+                <p>Correct answer!</p>
+            {% else %}
+                <p>Failed! Try again later</p>
+            {% endif %}
+        </div>
+    {% else %}
+        <p>There are no words to check.</p>
+    {% endif %}
 
     <a href="{% url "test" %}">
         <button class="base-button large-button blue-button">Next</button>
