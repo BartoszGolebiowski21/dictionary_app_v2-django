@@ -12,13 +12,13 @@ Test mode
 {% block content %}
     {% if entered_word %}
         <p><img src="https://icons.iconarchive.com/icons/hopstarter/flag-borderless/128/Poland-icon.png" width="32" height="32">
-            {{ drawn_word_polish }}</p>
+            {{ drawn_word.polish_translation }}</p>
 
         <p><img src="https://icons.iconarchive.com/icons/hopstarter/flag-borderless/128/United-Kingdom-icon.png" width="32" height="32">
-            {{ drawn_word_english }}</p>
+            {{ drawn_word.english_translation }}</p>
 
         <div class="result-message">
-            {% if entered_word == drawn_word_english %}
+            {% if entered_word == drawn_word.english_translation %}
                 <p>Correct answer!</p>
             {% else %}
                 <p>Failed! Try again later</p>
@@ -32,9 +32,13 @@ Test mode
         <button class="base-button large-button blue-button">Next</button>
     </a>
 
+{% comment %}
+COMMENTED FOR THE FUTURE
     {% if entered_word %}
         <button class="base-button small-button green-button">Learned</button>
         <button class="base-button small-button red-button">Super-hard</button>
         <div style="clear:both;"></div>
     {% endif %}
+{% endcomment %}
+
 {% endblock %}

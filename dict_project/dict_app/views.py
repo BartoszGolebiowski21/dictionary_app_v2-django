@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect
@@ -10,6 +10,8 @@ from .forms import WordForm, TestForm
 from .models import Word
 
 from random import randint
+
+from django.contrib.auth import login, authenticate
 
 
 def index(request):
@@ -65,19 +67,15 @@ def search(request):
 class TestView(View):
     def get(self, request):
         form = TestForm()
-
         words = Word.objects.filter(remaining_repetitions__gt=0)
         count = words.count()
 
         if count > 0:
             random_index = randint(0, count - 1)
             drawn_word = words[random_index]
-
-            # SLOWER METHOD:
+            # SLOWER METHOD TO DRAW A WORD:
             # drawn_word = Word.objects.filter(remaining_repetitions__gt=0).order_by('?')[1]
 
-            request.session['drawn_word_english'] = drawn_word.english_translation
-            request.session['drawn_word_polish'] = drawn_word.polish_translation
             request.session['drawn_word_id'] = drawn_word.id
 
         else:
@@ -97,23 +95,20 @@ class TestView(View):
 
 
 def check(request):
-    drawn_word_english = request.session.get('drawn_word_english')
-    drawn_word_polish = request.session.get('drawn_word_polish')
     entered_word = request.session.get('entered_word')
     drawn_word_id = request.session.get('drawn_word_id')
 
     if 'entered_word' in request.session:
-        request.session.clear()
-        if entered_word == drawn_word_english:
-            word = Word.objects.get(id=drawn_word_id)
-            word.remaining_repetitions -= 1
-            word.save()
-            print(word.remaining_repetitions)
+        drawn_word = Word.objects.get(id=drawn_word_id)
+        del request.session['entered_word']
+        del request.session['drawn_word_id']
+        if entered_word == drawn_word.english_translation:
+            drawn_word.remaining_repetitions -= 1
+            drawn_word.save()
 
-    context = {
-        "drawn_word_english": drawn_word_english,
-        "drawn_word_polish": drawn_word_polish,
-        "entered_word": entered_word,
-        }
-    return render(request, "dict_app/check.html", context)
-
+        context = {
+            "drawn_word": drawn_word,
+            "entered_word": entered_word,
+            }
+        return render(request, "dict_app/check.html", context)
+    return render(request, "dict_app/check.html")
