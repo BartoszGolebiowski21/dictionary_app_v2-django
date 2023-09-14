@@ -1,65 +1,65 @@
-# dictionary_app_v2-django
-Developed version of the dictionary_app. The current version has been created in Django.
+# Dictionary App
 
-Dictionary App
 The Dictionary App is a web application built with the Django framework. It's a tool that allows users to store, browse, and test words in different languages along with their translations. Below, you'll find information about the setup, features, and how to use this application.
 
-Requirements
+## Requirements
+
 Before you start using the application, make sure you have the following tools installed:
 
-Python 3.11.4
-Django 4.2.4
-Other dependencies listed in the requirements.txt file
+- Python 3.11.4
+- Django 4.2.4
+- Other dependencies listed in the `requirements.txt` file
 
-Installation
-Clone the repository with the source code of the application:
+## Installation
 
-bash
-Copy code
-git clone <repository_url>
-Navigate to the project directory:
+1. Clone the repository containing the source code for the application:
 
-bash
-Copy code
-cd project_name
-Install the required dependencies:
+git clone https://github.com/BartoszGolebiowski21/dictionary_app_v2-django.git
 
-Copy code
+2. Navigate to the project directory:
+
+cd dict_project
+
+3. Install the required dependencies:
+
 pip install -r requirements.txt
-Run database migrations:
 
-Copy code
-python manage.py migrate
-Start the development server:
+4. Apply database migrations:
 
-Copy code
+py manage.py makemigrations
+py manage.py migrate
+
+5. Start the development server:
+
 python manage.py runserver
-Open a web browser and go to http://localhost:8000/ to start using the application.
 
-Using the App
-The Dictionary App provides the following features:
+6. Open a web browser and access `http://localhost:8000/` to begin using the application.
 
-Home Page: When you first access the application, you'll be redirected to the home page, where you can find general information about the app.
+## Using the App
 
-Dictionary Overview: Click on "Dictionary Overview" in the navigation menu to browse all the words available in the dictionary. You can also perform searches using the search field.
+The Dictionary App offers the following functionalities:
 
-Add a Word: Use the "Add a Word" option in the navigation menu to add new words to the dictionary. You need to provide the word's translation in both English and Polish.
+- **Home Page**: When you first access the application, you'll be redirected to the home page, where you can find general information about the app.
 
-Word Details: Clicking on a specific word in the dictionary overview will take you to a page with detailed information about that word.
+- **Show the entire dictionary**:  Click on "Show the entire dictionary" in the navigation menu to browse all the words available in the dictionary. You can also perform searches using the search field.
 
-Edit a Word: You can edit a word by selecting the "Edit" option on the word's detail page.
+- **Add a new word**: Use the "Add a new word" option in the navigation menu to add new words to the dictionary. You need to provide the word's translation in both English and Polish.
 
-Delete a Word: If you want to remove a word, you can do so from the word's detail page.
+- **Word details**: Clicking on a specific word in the dictionary overview will take you to a page with detailed information about that word.
 
-Test Your Words: By choosing "Test Your Words" in the navigation menu, you can test your knowledge. The app will randomly select a word, and you'll have to provide its translation. Your answer will be evaluated.
+- **Edit the word**: You can edit a word by selecting the "Edit" option on the word's detail page.
 
-Authors
-This application was created by [Your Name]. If you have questions or need assistance, please contact us at [Your Email Address].
+- **Delete the word**: If you want to remove a word, you can do so from the word's detail page.
 
-License
-This project is licensed under the [License Name]. For more information, see the LICENSE file.
+- **Test mode**: By choosing "Test mode" in the navigation menu, you can test your knowledge. The app will randomly select a word, and you'll have to provide its translation. Your answer will be evaluated.
 
-Future Development
+## Authors
+
+This application was developed by Bartosz Gołębiowski.
+
+## Future Development
+
 The Dictionary App is an ongoing project. We plan to add new features and improvements. If you have ideas for enhancing this application, we'd love to hear your suggestions.
 
-Thank you for using the Dictionary App!
+Thank you for choosing the Dictionary App!
+
