@@ -14,24 +14,24 @@ Before you start using the application, make sure you have the following tools i
 
 1. Clone the repository containing the source code for the application:
 
-git clone https://github.com/BartoszGolebiowski21/dictionary_app_v2-django.git
+`git clone https://github.com/BartoszGolebiowski21/dictionary_app_v2-django.git`
 
 2. Navigate to the project directory:
 
-cd dict_project
+`cd dict_project`
 
 3. Install the required dependencies:
 
-pip install -r requirements.txt
+`pip install -r requirements.txt`
 
 4. Apply database migrations:
 
-py manage.py makemigrations
-py manage.py migrate
+`py manage.py makemigrations`
+`py manage.py migrate`
 
 5. Start the development server:
 
-python manage.py runserver
+`python manage.py runserver`
 
 6. Open a web browser and access `http://localhost:8000/` to begin using the application.
 
@@ -52,10 +52,6 @@ The Dictionary App offers the following functionalities:
 - **Delete the word**: If you want to remove a word, you can do so from the word's detail page.
 
 - **Test mode**: By choosing "Test mode" in the navigation menu, you can test your knowledge. The app will randomly select a word, and you'll have to provide its translation. Your answer will be evaluated.
-
-## Authors
-
-This application was developed by Bartosz Gołębiowski.
 
 ## Future Development
 
